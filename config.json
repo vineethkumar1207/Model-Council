@@ -1,0 +1,19 @@
+{
+  "ollama_base_url": "http://127.0.0.1:11434",
+  "default_models": [],
+  "gemini_models": [],
+  "max_parallel_models": 1,
+  "min_healthy_models": 2,
+  "health_check_timeout_seconds": 90,
+  "max_output_tokens": 4096,
+  "temperature": 0.2,
+  "context_budget_chars": 12000,
+  "session_dir": "sessions",
+  "role_hints": {
+    "zephyr": "analyst",
+    "qwen": "comparator",
+    "llama": "challenger",
+    "gemini": "synthesizer"
+  },
+  "num_ctx": 8192
+}

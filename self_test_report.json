@@ -1,0 +1,635 @@
+{
+  "timestamp": "2026-08-17T14:57:55.838352+00:00",
+  "project": "model-council",
+  "overall_status": "PASS",
+  "exit_code": 0,
+  "tests": {
+    "deterministic": {
+      "existing_unittest_suite": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "total": 51,
+          "passed": 51,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0,
+          "execution_time_seconds": 2.5358
+        }
+      }
+    },
+    "failure_injection": {
+      "provider_runtime_failures": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "cases": [
+            "timeout",
+            "HTTP 500",
+            "unavailable model",
+            "generic provider exception"
+          ],
+          "execution_time_seconds": 0.0076
+        }
+      },
+      "model_output_failures": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "cases": [
+            "malformed JSON",
+            "fenced JSON",
+            "valid JSON with missing fields",
+            "duplicate claims",
+            "contradictory positions",
+            "agreement incorrectly represented as disagreement",
+            "model-generated citation",
+            "empty claims",
+            "missing confidence",
+            "malformed nested structures",
+            "empty response",
+            "partial response"
+          ],
+          "execution_time_seconds": 0.0079
+        }
+      }
+    },
+    "invariants": {
+      "execution_vs_contribution_status": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "example": {
+            "execution_status": "completed",
+            "contribution_status": "empty"
+          },
+          "execution_time_seconds": 0.0
+        }
+      },
+      "health_role_allocation": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "unhealthy_excluded": "bad",
+          "ready_models": [
+            "qwen-good",
+            "llama-good"
+          ],
+          "execution_time_seconds": 0.0041
+        }
+      },
+      "pre_round_fittest_fallback": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "selected": "best-high",
+          "preflight": [
+            {
+              "round": 4,
+              "role": "synthesizer",
+              "requested_model": "requested",
+              "initial_status": "TIMEOUT",
+              "selected_model": "best-high",
+              "fallback_used": true,
+              "fallback_candidates": [
+                {
+                  "model": "best-high",
+                  "eligible": true,
+                  "score": 0.93,
+                  "role_fitness": 0.9,
+                  "resource_fitness": 1.0,
+                  "runtime_fitness": 1.0,
+                  "health": "READY",
+                  "execution_locality": "local",
+                  "reasons": []
+                },
+                {
+                  "model": "first-low",
+                  "eligible": true,
+                  "score": 0.44,
+                  "role_fitness": 0.2,
+                  "resource_fitness": 1.0,
+                  "runtime_fitness": 1.0,
+                  "health": "READY",
+                  "execution_locality": "local",
+                  "reasons": []
+                },
+                {
+                  "model": "private-cloud:cloud",
+                  "eligible": false,
+                  "score": 1.0,
+                  "role_fitness": 1.0,
+                  "resource_fitness": 1.0,
+                  "runtime_fitness": 1.0,
+                  "health": "READY",
+                  "execution_locality": "cloud",
+                  "reasons": [
+                    "privacy constraint"
+                  ]
+                },
+                {
+                  "model": "too-big",
+                  "eligible": false,
+                  "score": 0.765,
+                  "role_fitness": 0.95,
+                  "resource_fitness": 0.0,
+                  "runtime_fitness": 1.0,
+                  "health": "READY",
+                  "execution_locality": "local",
+                  "reasons": [
+                    "resource constraint"
+                  ]
+                },
+                {
+                  "model": "requested",
+                  "eligible": false,
+                  "score": 0.2,
+                  "role_fitness": 0.0,
+                  "resource_fitness": 1.0,
+                  "runtime_fitness": 0.0,
+                  "health": "TIMEOUT",
+                  "execution_locality": "local",
+                  "reasons": [
+                    "TIMEOUT"
+                  ]
+                }
+              ]
+            }
+          ],
+          "execution_time_seconds": 0.0016
+        }
+      },
+      "role_execution_path": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "rounds": [
+            "analyst",
+            "comparator",
+            "challenger",
+            "synthesizer"
+          ],
+          "provider_calls": [
+            "zephyr-a",
+            "qwen-c",
+            "llama-k",
+            "gemini-s"
+          ],
+          "execution_time_seconds": 0.0747
+        }
+      },
+      "claim_registry": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "claims": [
+            {
+              "claim_id": "C-001",
+              "claim_text": "Same claim",
+              "source_models": [
+                "a",
+                "b"
+              ],
+              "supporting_models": [],
+              "contradicting_models": [],
+              "confidence": 0.8,
+              "verification_status": "unverified",
+              "claim_positions": {
+                "a": "local",
+                "b": "local"
+              }
+            }
+          ],
+          "execution_time_seconds": 0.003
+        }
+      },
+      "claim_parsing_normalization": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "forms": [
+            "native JSON",
+            "fenced JSON",
+            "sectioned text"
+          ],
+          "execution_time_seconds": 0.0006
+        }
+      },
+      "disagreement_logic": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "states": [
+            "open",
+            "resolved",
+            "unresolved"
+          ],
+          "execution_time_seconds": 0.0031
+        }
+      },
+      "verification_semantics": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "consensus_not_truth": true,
+          "status": "unverified",
+          "execution_time_seconds": 0.0031
+        }
+      },
+      "revision_tracking": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "revision": {
+            "revision_id": "R-001",
+            "model": "a",
+            "original_position": "Use cloud",
+            "revised_position": "Use local",
+            "reason": "privacy",
+            "affected_claims": [
+              "C-001"
+            ]
+          },
+          "execution_time_seconds": 0.0031
+        }
+      },
+      "synthesis_contract": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "contract": [
+            "Decision",
+            "Rationale",
+            "Conditions",
+            "Trade-offs",
+            "Unresolved Issues",
+            "Confidence",
+            "raw"
+          ],
+          "execution_time_seconds": 0.0003
+        }
+      },
+      "cloud_vs_local_classification": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "minimax-m3:cloud": "cloud",
+          "qwen2.5:7b": "local",
+          "execution_time_seconds": 0.0025
+        }
+      },
+      "checkpoint_recovery": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "session_id": "MC-460721A3",
+          "rounds": 4,
+          "execution_time_seconds": 0.085
+        }
+      },
+      "existing_session_compatibility": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "fixture": "temporary copied old-format session",
+          "execution_time_seconds": 0.0045
+        }
+      },
+      "terminal_renderer": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "semantic_sections_verified": true,
+          "execution_time_seconds": 0.0001
+        }
+      },
+      "resource_safe_execution": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "default_local_parallelism": 1,
+          "configured_parallelism": 2,
+          "execution_time_seconds": 0.0034
+        }
+      },
+      "single_model_test_mode": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "single_model_test_passed": true,
+          "execution_time_seconds": 0.0169
+        }
+      },
+      "dynamic_ollama_candidate_selection": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "strategy": "preferred_cloud_plus_two_local",
+          "selected_models": [
+            "tiny-cloud:cloud",
+            "tiny-local",
+            "mid-local"
+          ],
+          "execution_time_seconds": 0.0001
+        }
+      },
+      "dynamic_ollama_candidate_replacement": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "strategy": "fallback_three_local",
+          "excluded_timed_out_model": "slow-local",
+          "execution_time_seconds": 0.0001
+        }
+      },
+      "phase_firewall_and_verification_invariants": {
+        "status": "PASS",
+        "required": true,
+        "details": {
+          "firewall_and_verification_verified": true,
+          "execution_time_seconds": 0.0033
+        }
+      }
+    },
+    "ollama_smoke": {
+      "real_ollama_smoke": {
+        "status": "PASS",
+        "required": false,
+        "details": {
+          "infrastructure_status": "PASS",
+          "model_discovery_status": "PASS",
+          "health_status": "PASS",
+          "single_model_execution_status": "PASS",
+          "multi_model_execution_status": "SKIPPED",
+          "structured_contribution_status": "PASS",
+          "round_1_status": "PASS",
+          "round_2_status": "SKIPPED",
+          "round_3_status": "SKIPPED",
+          "synthesis_status": "PASS",
+          "checkpoint_status": "PASS",
+          "replay_status": "PASS",
+          "mode": "degraded",
+          "selection_strategy": "fallback_one_ready_degraded",
+          "models_tested": [
+            "gemma4:31b-cloud"
+          ],
+          "available_models": [
+            "gemma4:e4b",
+            "gemma4:latest",
+            "glm-5.1:cloud",
+            "glm-5.2:cloud",
+            "nemotron-3-super:cloud",
+            "qwen3.5:cloud",
+            "minimax-m2.7:cloud",
+            "deepseek-v4-pro:cloud",
+            "kimi-k2.6:cloud",
+            "kimi-k2.7-code:cloud",
+            "gemma4:31b-cloud",
+            "gemma4:cloud",
+            "deepseek-v4-flash:cloud",
+            "gemma4:26b",
+            "minimax-m3:cloud",
+            "gemma3:12b",
+            "zephyr:7b-alpha-q3_K_S",
+            "qwen3.5:4b",
+            "qwen2.5:7b",
+            "qwen3.5:9b",
+            "llama3.2:latest"
+          ],
+          "health": {
+            "deepseek-v4-flash:cloud": {
+              "model_id": "deepseek-v4-flash:cloud",
+              "provider": "ollama",
+              "local_or_cloud": "cloud",
+              "health_status": "FAILED",
+              "status": "FAILED",
+              "initial_check_duration": 0.221,
+              "warmup_attempted": false,
+              "warmup_duration": null,
+              "final_health_status": "FAILED",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Provider failure: HTTP 403: {\"error\":\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 4ec30bea-f538-42b8-b0c0-830496dec3b8)\"}",
+              "latency_ms": 221
+            },
+            "llama3.2:latest": {
+              "model_id": "llama3.2:latest",
+              "provider": "ollama",
+              "local_or_cloud": "local",
+              "health_status": "TIMEOUT",
+              "status": "TIMEOUT",
+              "initial_check_duration": 8.011,
+              "warmup_attempted": true,
+              "warmup_duration": 45.006,
+              "final_health_status": "TIMEOUT",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Timeout: Request timed out",
+              "latency_ms": 53017
+            },
+            "deepseek-v4-pro:cloud": {
+              "model_id": "deepseek-v4-pro:cloud",
+              "provider": "ollama",
+              "local_or_cloud": "cloud",
+              "health_status": "FAILED",
+              "status": "FAILED",
+              "initial_check_duration": 0.234,
+              "warmup_attempted": false,
+              "warmup_duration": null,
+              "final_health_status": "FAILED",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Provider failure: HTTP 403: {\"error\":\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 205f5ba9-657e-47ab-abb9-544149e96b49)\"}",
+              "latency_ms": 234
+            },
+            "gemma4:31b-cloud": {
+              "model_id": "gemma4:31b-cloud",
+              "provider": "ollama",
+              "local_or_cloud": "cloud",
+              "health_status": "READY",
+              "status": "READY",
+              "initial_check_duration": 2.044,
+              "warmup_attempted": false,
+              "warmup_duration": null,
+              "final_health_status": "READY",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Health check passed",
+              "latency_ms": 2044
+            },
+            "zephyr:7b-alpha-q3_K_S": {
+              "model_id": "zephyr:7b-alpha-q3_K_S",
+              "provider": "ollama",
+              "local_or_cloud": "local",
+              "health_status": "TIMEOUT",
+              "status": "TIMEOUT",
+              "initial_check_duration": 8.008,
+              "warmup_attempted": true,
+              "warmup_duration": 45.018,
+              "final_health_status": "TIMEOUT",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Timeout: Request timed out",
+              "latency_ms": 53026
+            },
+            "qwen3.5:4b": {
+              "model_id": "qwen3.5:4b",
+              "provider": "ollama",
+              "local_or_cloud": "local",
+              "health_status": "TIMEOUT",
+              "status": "TIMEOUT",
+              "initial_check_duration": 8.039,
+              "warmup_attempted": true,
+              "warmup_duration": 45.091,
+              "final_health_status": "TIMEOUT",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Timeout: Request timed out",
+              "latency_ms": 53139
+            },
+            "qwen2.5:7b": {
+              "model_id": "qwen2.5:7b",
+              "provider": "ollama",
+              "local_or_cloud": "local",
+              "health_status": "TIMEOUT",
+              "status": "TIMEOUT",
+              "initial_check_duration": 8.06,
+              "warmup_attempted": true,
+              "warmup_duration": 45.045,
+              "final_health_status": "TIMEOUT",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Timeout: Request timed out",
+              "latency_ms": 53105
+            },
+            "qwen3.5:9b": {
+              "model_id": "qwen3.5:9b",
+              "provider": "ollama",
+              "local_or_cloud": "local",
+              "health_status": "TIMEOUT",
+              "status": "TIMEOUT",
+              "initial_check_duration": 8.028,
+              "warmup_attempted": true,
+              "warmup_duration": 45.145,
+              "final_health_status": "TIMEOUT",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Timeout: Request timed out",
+              "latency_ms": 53176
+            },
+            "gemma3:12b": {
+              "model_id": "gemma3:12b",
+              "provider": "ollama",
+              "local_or_cloud": "local",
+              "health_status": "TIMEOUT",
+              "status": "TIMEOUT",
+              "initial_check_duration": 8.028,
+              "warmup_attempted": true,
+              "warmup_duration": 45.021,
+              "final_health_status": "TIMEOUT",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Timeout: Request timed out",
+              "latency_ms": 53049
+            },
+            "gemma4:e4b": {
+              "model_id": "gemma4:e4b",
+              "provider": "ollama",
+              "local_or_cloud": "local",
+              "health_status": "TIMEOUT",
+              "status": "TIMEOUT",
+              "initial_check_duration": 8.047,
+              "warmup_attempted": true,
+              "warmup_duration": 45.055,
+              "final_health_status": "TIMEOUT",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Timeout: Request timed out",
+              "latency_ms": 53102
+            },
+            "gemma4:latest": {
+              "model_id": "gemma4:latest",
+              "provider": "ollama",
+              "local_or_cloud": "local",
+              "health_status": "TIMEOUT",
+              "status": "TIMEOUT",
+              "initial_check_duration": 8.011,
+              "warmup_attempted": true,
+              "warmup_duration": 45.104,
+              "final_health_status": "TIMEOUT",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Timeout: Request timed out",
+              "latency_ms": 53115
+            },
+            "gemma4:26b": {
+              "model_id": "gemma4:26b",
+              "provider": "ollama",
+              "local_or_cloud": "local",
+              "health_status": "TIMEOUT",
+              "status": "TIMEOUT",
+              "initial_check_duration": 8.03,
+              "warmup_attempted": true,
+              "warmup_duration": 45.016,
+              "final_health_status": "TIMEOUT",
+              "cold_start": false,
+              "warmup_required": false,
+              "reason": "Timeout: Request timed out",
+              "latency_ms": 53046
+            }
+          },
+          "role_plan": {
+            "analyst": [
+              "gemma4:31b-cloud"
+            ],
+            "comparator": [
+              "gemma4:e4b"
+            ],
+            "challenger": [],
+            "synthesizer": [
+              "gemma4:31b-cloud"
+            ]
+          },
+          "actual_role_execution": [
+            "gemma4:31b-cloud",
+            "gemma4:31b-cloud"
+          ],
+          "structured_council_state": {
+            "claims": 1
+          },
+          "checkpoint_session_id": "MC-B4412ADE",
+          "checkpoint_rounds": 2,
+          "final_synthesis": {
+            "Decision": "A council is an advisory, deliberative, or administrative body of people convened to consult, advise, make decisions, or provide governance.",
+            "Rationale": "The conclusion is based on claim C-001, which provides a comprehensive general definition covering the primary functions (advisory, deliberative, administrative) of such a body.",
+            "Conditions": [
+              "The definition assumes a general sociopolitical or organizational context (A-001)."
+            ],
+            "Trade-offs": [
+              "Breadth vs. Specificity: A generalized definition is used to cover various types of councils (e.g., municipal, ecclesiastical) at the expense of specific technical nuances for any single type."
+            ],
+            "Unresolved Issues": [
+              "The specific domain of the \"council\" was not provided in the prompt, leaving the definition as a general abstraction (U-001)."
+            ],
+            "Confidence": 0.95,
+            "raw": "**Decision:**\nA council is an advisory, deliberative, or administrative body of people convened to consult, advise, make decisions, or provide governance.\n\n**Rationale:**\nThe conclusion is based on claim C-001, which provides a comprehensive general definition covering the primary functions (advisory, deliberative, administrative) of such a body.\n\n**Conditions:**\n- The definition assumes a general sociopolitical or organizational context (A-001).\n\n**Trade-offs:**\n- Breadth vs. Specificity: A generalized definition is used to cover various types of councils (e.g., municipal, ecclesiastical) at the expense of specific technical nuances for any single type.\n\n**Unresolved Issues:**\n- The specific domain of the \"council\" was not provided in the prompt, leaving the definition as a general abstraction (U-001).\n\n**Confidence:**\n0.95"
+          },
+          "execution_time_seconds": 495.6
+        }
+      }
+    }
+  },
+  "summary": {
+    "passed": 23,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failures": [],
+  "optional_failures": [],
+  "skips": [],
+  "environment": {
+    "python": "3.11.15",
+    "platform": "win32",
+    "cwd": "D:\\model-council-experiment-v0.1"
+  }
+}

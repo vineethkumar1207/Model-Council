@@ -1,0 +1,3 @@
+# Optional. Local Ollama mode uses Python standard library only.
+# Install this only if you want Gemini support:
+google-genai>=1.0.0

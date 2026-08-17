@@ -1,0 +1,101 @@
+{
+  "consecutive_successes": 3,
+  "runs": [
+    {
+      "session_id": "MC-010F4E93",
+      "cloud_model": "minimax-m3:cloud",
+      "local_model": "llama3.2:latest",
+      "health": {
+        "minimax-m3:cloud": "READY",
+        "llama3.2:latest": "READY"
+      },
+      "warmup": {
+        "minimax-m3:cloud": false,
+        "llama3.2:latest": true
+      },
+      "rounds": 4,
+      "claims": 6,
+      "agreements": 0,
+      "disagreements": 0,
+      "uncertainties": 5,
+      "synthesis_status": "valid",
+      "decision_non_empty": true,
+      "checkpoint": true,
+      "replay": true,
+      "total_latency_seconds": 123.11,
+      "analyst_latencies_ms": {
+        "minimax-m3:cloud": 11447,
+        "llama3.2:latest": 15553
+      },
+      "analyst_tokens": {
+        "minimax-m3:cloud": 881,
+        "llama3.2:latest": 204
+      },
+      "final_status": "completed"
+    },
+    {
+      "session_id": "MC-8B9F92D8",
+      "cloud_model": "minimax-m3:cloud",
+      "local_model": "llama3.2:latest",
+      "health": {
+        "minimax-m3:cloud": "READY",
+        "llama3.2:latest": "READY"
+      },
+      "warmup": {
+        "minimax-m3:cloud": false,
+        "llama3.2:latest": true
+      },
+      "rounds": 4,
+      "claims": 6,
+      "agreements": 0,
+      "disagreements": 0,
+      "uncertainties": 8,
+      "synthesis_status": "valid",
+      "decision_non_empty": true,
+      "checkpoint": true,
+      "replay": true,
+      "total_latency_seconds": 241.79,
+      "analyst_latencies_ms": {
+        "minimax-m3:cloud": 12976,
+        "llama3.2:latest": 12632
+      },
+      "analyst_tokens": {
+        "minimax-m3:cloud": 962,
+        "llama3.2:latest": 181
+      },
+      "final_status": "completed"
+    },
+    {
+      "session_id": "MC-883A59C3",
+      "cloud_model": "minimax-m3:cloud",
+      "local_model": "llama3.2:latest",
+      "health": {
+        "minimax-m3:cloud": "READY",
+        "llama3.2:latest": "READY"
+      },
+      "warmup": {
+        "minimax-m3:cloud": false,
+        "llama3.2:latest": true
+      },
+      "rounds": 4,
+      "claims": 6,
+      "agreements": 0,
+      "disagreements": 0,
+      "uncertainties": 5,
+      "synthesis_status": "valid",
+      "decision_non_empty": true,
+      "checkpoint": true,
+      "replay": true,
+      "total_latency_seconds": 131.15,
+      "analyst_latencies_ms": {
+        "minimax-m3:cloud": 13555,
+        "llama3.2:latest": 14347
+      },
+      "analyst_tokens": {
+        "minimax-m3:cloud": 949,
+        "llama3.2:latest": 195
+      },
+      "final_status": "completed"
+    }
+  ]
+}

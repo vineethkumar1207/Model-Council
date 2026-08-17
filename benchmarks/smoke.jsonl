@@ -1,0 +1,5 @@
+{"id":"S001","question":"What are the main advantages and disadvantages of running an AI model locally versus through a cloud API?"}
+{"id":"S002","question":"A startup has sensitive customer data, a small budget, and needs strong reasoning. What should it consider when choosing between local and cloud models?"}
+{"id":"S003","question":"Two engineers disagree about whether adding more AI models always improves answer quality. Analyze the claim and identify conditions under which it could be false."}
+{"id":"S004","question":"Explain why majority voting among multiple language models can still produce a wrong answer."}
+{"id":"S005","question":"Design a simple experiment to determine whether structured multi-model deliberation is better than the strongest individual model."}
